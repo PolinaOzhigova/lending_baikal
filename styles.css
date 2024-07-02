@@ -1,0 +1,126 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Roboto, sans-serif;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 60px;
+  background-color: #ffffff;
+  box-shadow: 1px 0px 20px rgba(0, 0, 0, .15);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: width 0.3s;
+}
+
+.sidebar.expanded {
+  width: 200px;
+}
+
+.hamburger {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #00bfff;
+  color: #fff;
+  text-align: center;
+}
+
+.menu {
+  display: none;
+  margin-top: 50px;
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu li {
+  margin: 20px 0;
+}
+
+.menu a {
+  color: #000;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  transition: background 0.3s;
+}
+
+.menu a:hover{
+  background: rgba(0, 191, 255, 0.3);
+}
+
+.section-indicators {
+  display: flex;
+  flex-direction: column;
+}
+
+.indicator {
+  flex-grow: 1;
+  background-color: #fff;
+  transition: background 0.3s;
+}
+
+.indicator.active {
+  background-color: #8fe3ff;;
+}
+
+.content {
+  margin-left: 60px;
+  padding: 20px;
+  transition: margin-left 0.3s;
+}
+
+.sidebar.expanded + .content {
+  margin-left: 200px;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.main-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+
+    @charset "UTF-8";
+    @font-face { font-family:"Roboto";src:url("font/Roboto-Black") format(svg)}
+    .str0 {stroke:#017CC4;stroke-width:2.9998;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.701961}
+    .str1 {stroke:#2B2A29;stroke-width:2.36205}
+    .str2 {stroke:#00BFFF;stroke-width:2.9998}
+    .fil1 {fill:#007CC4}
+    .fil3 {fill:#00BFFF}
+    .fil0 {fill:#035D9E;fill-rule:nonzero;fill-opacity:0.200000}
+    .fil2 {fill:#0077CC;fill-opacity:0.701961}
+    .fnt0 {font-weight:900;font-size:416.637px;font-family:'Source Sans Pro Black'}
+
+}
+
+iframe {
+  width: 100%;
+  height: 70vh;
+}
+
+h1, h2 {
+  text-align: center;
+  margin: 20px 0;
+  color: #26465e;
+}
+
+h1{
+  font-size: 40px;
+  font-weight:900;
+}
