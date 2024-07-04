@@ -44,6 +44,16 @@ document.addEventListener("DOMContentLoaded", function() {
           link.setAttribute('href', `#${h2.id}`);
           listItem.appendChild(link);
           submenu.appendChild(listItem);
+
+          // Добавление обработчика для клика по пункту подменю
+          link.addEventListener('click', function() {
+            submenu.parentNode.removeChild(submenu);
+            closeMenu();
+            const tableauPlaceholders = document.querySelectorAll('.tableauPlaceholder');
+            tableauPlaceholders.forEach(placeholder => {
+              placeholder.style.pointerEvents = 'auto';
+            });
+          });
         });
 
         // Удаление предыдущего подменю, если есть
