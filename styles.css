@@ -235,11 +235,11 @@ iframe, p{
   }
   h1{
     font-size: 22px;
-    font-weight:700;
+    font-weight: 700;
   }
   h2{
     font-size: 18px;
-    font-weight:700;
+    font-weight: 700;
   }
   .box h3{
     font-size: 18px;
@@ -282,7 +282,7 @@ iframe, p{
   .menu ul li ul.submenu {
     display: none;
     position: fixed;
-    top: 0;
+    top: 48px;
     left: 0;
     list-style-type: none;
     padding: 0;
