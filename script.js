@@ -14,21 +14,14 @@ function closeMenu() {
 
 document.addEventListener("DOMContentLoaded", function() {
   const menuItems = document.querySelectorAll('.menu > ul > li > a');
-
+  // console.log(menuItems);
   menuItems.forEach(item => {
-    const openSubmenu = function() {
+    item.addEventListener('mouseenter', function() {
       const sectionId = item.getAttribute('href').substring(1);
-
-      // Исключаем секции #section2 и #section6
-      if (sectionId === 'section2' || sectionId === 'section6') {
-        return;
-      }
-
       const section = document.getElementById(sectionId);
       if (section) {
         const h2List = section.querySelectorAll('h2');
         const submenu = document.createElement('ul');
-
         h2List.forEach(h2 => {
           const listItem = document.createElement('li');
           const link = document.createElement('a');
@@ -38,14 +31,9 @@ document.addEventListener("DOMContentLoaded", function() {
           submenu.appendChild(listItem);
 
           // Добавление обработчика для клика по пункту подменю
-          link.addEventListener('click', function(event) {
-            event.stopPropagation();
+          link.addEventListener('click', function() {
             submenu.parentNode.removeChild(submenu);
             closeMenu();
-            const tableauPlaceholders = document.querySelectorAll('.tableauPlaceholder');
-            tableauPlaceholders.forEach(placeholder => {
-              placeholder.style.pointerEvents = 'auto';
-            });
           });
         });
 
@@ -54,29 +42,15 @@ document.addEventListener("DOMContentLoaded", function() {
         if (existingSubmenu) {
           existingSubmenu.parentNode.removeChild(existingSubmenu);
         }
-
         // Показать подменю
         submenu.classList.add('submenu');
         item.parentNode.appendChild(submenu);
-
-        // Добавление класса для tableauPlaceholder
-        const tableauPlaceholders = document.querySelectorAll('.tableauPlaceholder');
-        tableauPlaceholders.forEach(placeholder => {
-          placeholder.style.pointerEvents = 'none';
-        });
-
         // Добавление события для подменю
         submenu.addEventListener('mouseleave', function() {
           submenu.parentNode.removeChild(submenu);
-          tableauPlaceholders.forEach(placeholder => {
-            placeholder.style.pointerEvents = 'auto';
-          });
         });
       }
-    };
-
-    // Обработчики для настольных ПК
-    item.addEventListener('mouseenter', openSubmenu);
+    });
     item.addEventListener('mouseleave', function() {
       const submenu = item.parentNode.querySelector('.submenu');
       if (submenu) {
@@ -85,41 +59,12 @@ document.addEventListener("DOMContentLoaded", function() {
         });
         submenu.addEventListener('mouseleave', function() {
           submenu.parentNode.removeChild(submenu);
-          const tableauPlaceholders = document.querySelectorAll('.tableauPlaceholder');
-          tableauPlaceholders.forEach(placeholder => {
-            placeholder.style.pointerEvents = 'auto';
-          });
         });
       }
     });
-
-    // Обработчики для мобильных устройств
-    item.addEventListener('click', function(event) {
-      event.preventDefault();
-      event.stopPropagation();
-      const sectionId = item.getAttribute('href').substring(1);
-
-      // Исключаем секции #section2 и #section6
-      if (sectionId === 'section2' || sectionId === 'section6') {
-        window.location.href = item.getAttribute('href');
-        return;
-      }
-
-      if (item.parentNode.querySelector('.submenu')) {
-        item.parentNode.querySelector('.submenu').remove();
-      } else {
-        openSubmenu();
-      }
-    });
-  });
-
-  // Закрытие меню на мобильных устройствах
-  menuItems.forEach(item => {
-    item.addEventListener('click', function() {
-      closeMenu();
-    });
   });
 });
+
 
 document.addEventListener("DOMContentLoaded", function() {
   const description = document.getElementById("description");
