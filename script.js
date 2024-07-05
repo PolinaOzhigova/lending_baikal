@@ -12,19 +12,6 @@ function closeMenu() {
   menu.style.display = 'none';
 }
 
-window.addEventListener('scroll', () => {
-  const indicators = document.querySelectorAll('.indicator');
-  const sections = document.querySelectorAll('section');
-  
-  sections.forEach((section, index) => {
-    const rect = section.getBoundingClientRect();
-    if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
-      indicators.forEach(indicator => indicator.classList.remove('active'));
-      indicators[index].classList.add('active');
-    }
-  });
-});
-
 document.addEventListener("DOMContentLoaded", function() {
   const menuItems = document.querySelectorAll('.menu > ul > li > a');
 
@@ -97,5 +84,31 @@ document.addEventListener("DOMContentLoaded", function() {
         });
       }
     });
+  });
+
+  menuItems.forEach(item => {
+    item.addEventListener('click', function() {
+      closeMenu();
+    });
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  const description = document.getElementById("description");
+  const toggleButton = document.getElementById("toggleDescription");
+
+  toggleButton.addEventListener("click", function(event) {
+      event.preventDefault();
+      if (description.classList.contains("collapsed")) {
+          description.classList.remove("collapsed");
+          description.classList.add("expanded");
+          toggleButton.textContent = "скрыть";
+      } else {
+          description.classList.remove("expanded");
+          description.classList.add("collapsed");
+          toggleButton.textContent = "открыть далее";
+          description.scrollIntoView({ behavior: 'smooth' });
+      }
   });
 });
