@@ -16,10 +16,15 @@ document.addEventListener("DOMContentLoaded", function() {
   const menuItems = document.querySelectorAll('.menu > ul > li > a');
 
   menuItems.forEach(item => {
-    item.addEventListener('mouseenter', function() {
+    const openSubmenu = function() {
       const sectionId = item.getAttribute('href').substring(1);
-      const section = document.getElementById(sectionId);
 
+      // Исключаем секции #section2 и #section6
+      if (sectionId === 'section2' || sectionId === 'section6') {
+        return;
+      }
+
+      const section = document.getElementById(sectionId);
       if (section) {
         const h2List = section.querySelectorAll('h2');
         const submenu = document.createElement('ul');
@@ -33,7 +38,8 @@ document.addEventListener("DOMContentLoaded", function() {
           submenu.appendChild(listItem);
 
           // Добавление обработчика для клика по пункту подменю
-          link.addEventListener('click', function() {
+          link.addEventListener('click', function(event) {
+            event.stopPropagation();
             submenu.parentNode.removeChild(submenu);
             closeMenu();
             const tableauPlaceholders = document.querySelectorAll('.tableauPlaceholder');
@@ -67,8 +73,10 @@ document.addEventListener("DOMContentLoaded", function() {
           });
         });
       }
-    });
+    };
 
+    // Обработчики для настольных ПК
+    item.addEventListener('mouseenter', openSubmenu);
     item.addEventListener('mouseleave', function() {
       const submenu = item.parentNode.querySelector('.submenu');
       if (submenu) {
@@ -84,15 +92,34 @@ document.addEventListener("DOMContentLoaded", function() {
         });
       }
     });
+
+    // Обработчики для мобильных устройств
+    item.addEventListener('click', function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      const sectionId = item.getAttribute('href').substring(1);
+
+      // Исключаем секции #section2 и #section6
+      if (sectionId === 'section2' || sectionId === 'section6') {
+        window.location.href = item.getAttribute('href');
+        return;
+      }
+
+      if (item.parentNode.querySelector('.submenu')) {
+        item.parentNode.querySelector('.submenu').remove();
+      } else {
+        openSubmenu();
+      }
+    });
   });
 
+  // Закрытие меню на мобильных устройствах
   menuItems.forEach(item => {
     item.addEventListener('click', function() {
       closeMenu();
     });
   });
 });
-
 
 document.addEventListener("DOMContentLoaded", function() {
   const description = document.getElementById("description");
